@@ -17,10 +17,10 @@ class Grid(object):
     def set_interaction_points(self):
 
         home = InteractionPoint(0, 0, False)
-        food = InteractionPoint(GRID_HEIGHT - 1, GRID_WIDTH - 1, True)
+        food = InteractionPoint(GRID_WIDTH - 1, GRID_HEIGHT - 1, True)
 
         self.grid[0][0] = home
-        self.grid[self.height - 1][self.width - 1] = food
+        self.grid[GRID_HEIGHT - 1][GRID_WIDTH - 1] = food
 
 
     def print_grid(self):

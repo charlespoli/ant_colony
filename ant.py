@@ -1,15 +1,19 @@
 from random import choice
 from grid import Grid
+from constant import *
 
 
 class Ant(object):
+
+    List = []
 
     def __init__(self, coordX, coordY, isHungry = True):
 
         self.coordX = coordX
         self.coordY = coordY
         self.isHungry = isHungry
-        self.grid = Grid()
+
+        Ant.List.append(self)
 
 
     def update_position(self):
@@ -28,9 +32,9 @@ class Ant(object):
             directions.append('L')
         if self.coordY > 0:
             directions.append('U')
-        if self.coordX < self.grid.width:
+        if self.coordX < GRID_WIDTH:
             directions.append('R')
-        if self.coordY < self.grid.height:
+        if self.coordY < GRID_HEIGHT:
             directions.append('D')
 
         dir = choice(directions)
