@@ -6,8 +6,6 @@ from case import *
 
 class Drawer(object):
 
-
-
     def __init__(self, fenetre):
 
         self.canvas = Canvas(fenetre, width=CANVAS_WIDTH, height=CANVAS_HEIGHT,
@@ -15,23 +13,24 @@ class Drawer(object):
         self.canvas.pack()
         self.AntSpriteList = []
 
-    def draw_ants(self, antList):
-
-        for ant in antList:
-            x = ant.coordX * CELL_SIZE
-            y = ant.coordY * CELL_SIZE
-            self.AntSpriteList.append(self.canvas.create_rectangle(x, y, x + CELL_SIZE - 1,
-                                         y + CELL_SIZE - 1, fill=COLOR_ANT))
-
-    def update_ants(self, antList):
-
-        for i in range(len(self.AntSpriteList)):
-            x = antList[i].coordX * CELL_SIZE
-            y = antList[i].coordY * CELL_SIZE
-            self.canvas.coords(self.AntSpriteList[i], [x, y, x + CELL_SIZE - 1,
-                                         y + CELL_SIZE - 1])
-
-
+    # def draw_ants(self, antList):
+    #
+    #     for ant in antList:
+    #         x = ant.coordX * CELL_SIZE
+    #         y = ant.coordY * CELL_SIZE
+    #         rec = self.canvas.create_rectangle(x, y, x + CELL_SIZE - 1,
+    #                                      y + CELL_SIZE - 1, fill=COLOR_ANT)
+    #         self.AntSpriteList.append(rec)
+    #
+    # def update_ants(self, antList):
+    #
+    #     for i in range(len(self.AntSpriteList)):
+    #         #dx = self.canvas.coords(self.AntSpriteList[i])[0] - antList[i].coordX
+    #         #dy = self.canvas.coords(self.AntSpriteList[i])[1] - antList[i].coordY
+    #         x = antList[i].coordX
+    #         y = antList[i].coordY
+    #         self.canvas.move(self.AntSpriteList[i], x, y)
+    #         self.canvas.after(100, self.update_ants)
 
     def draw_grid(self, grid):
 

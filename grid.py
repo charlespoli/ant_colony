@@ -13,7 +13,6 @@ class Grid(object):
             for x in range(GRID_WIDTH):
                 self.grid[y].append(Case(x, y))
 
-
     def set_interaction_points(self):
 
         home = InteractionPoint(0, 0, False)
@@ -21,7 +20,6 @@ class Grid(object):
 
         self.grid[0][0] = home
         self.grid[GRID_HEIGHT - 1][GRID_WIDTH - 1] = food
-
 
     def print_grid(self):
 
@@ -38,7 +36,6 @@ class Grid(object):
                         buffer += 'H'
             print(buffer)
 
-
     def update_odour(self):
         # Odour decays
         pass
@@ -46,8 +43,3 @@ class Grid(object):
     def check_interaction_point(self):
         pass
         # Checks if ant reaches interaction_point
-
-
-
-
-
