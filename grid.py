@@ -21,6 +21,7 @@ class Grid(object):
         self.grid[0][0] = home
         self.grid[self.height - 1][self.width - 1] = food
 
+
     def print_grid(self):
 
         for row in self.grid:

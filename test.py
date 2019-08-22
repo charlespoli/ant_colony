@@ -10,18 +10,18 @@ width = CANVAS_WIDTH
 height = CANVAS_HEIGHT
 canvas = Canvas(fenetre, width=width, height=height, background='#D3D3D3')
 
-canvas.create_rectangle(230, 10, 290, 60,
-    outline="#f11", fill="#1f1", width=2)
-
-canvas.pack()
-
-fenetre.mainloop()
 
 test = Grid()
 
 test.set_interaction_points()
+test.
 test.print_grid()
 
+
+
+canvas.pack()
+
+fenetre.mainloop()
 
 
 
