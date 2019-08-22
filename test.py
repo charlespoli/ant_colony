@@ -1,5 +1,5 @@
 from tkinter import * 
-
+from grid import Grid
 fenetre = Tk()
 fenetre.geometry("1200x800")
 fenetre.resizable(0, 0)
@@ -14,3 +14,7 @@ txt = canvas.create_text(width/2, height/2, text="Cible", font="Arial 16 "
 canvas.pack()
 
 fenetre.mainloop()
+
+test = Grid(4, 4)
+
+print(test.matrix)
