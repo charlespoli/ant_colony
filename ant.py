@@ -6,3 +6,18 @@ class Ant(object):
         self.coordY = coordY
         self.isHungry = isHungry
 
+
+    def update_position(self):
+        # Update ant's position and leave odour on previous location
+
+        ant_movement()
+        leave_odour()
+
+
+    def ant_movement(self):
+        pass
+
+
+    def leave_odour(self):
+        pass
+
