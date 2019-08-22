@@ -1,17 +1,28 @@
 from constant import *
 
 
-class Case(object):
+class AbstractCase(object):
 
-    def __init__(self):
+    def __init__(self, coordX, coordY):
+
+        self.coordX = coordX
+        self.coordY = coordY
+
+
+class Case(AbstractCase):
+
+    def __init__(self, coordX, coordY):
+
+        super().__init__(coordX, coordY)
         self.odour_home = 0
         self.odour_food = 0
 
 
-class InteractionPoint(object):
+class InteractionPoint(AbstractCase):
 
-    def __init__(self, isFood):
+    def __init__(self, coordX, coordY, isFood):
 
+        super().__init__(coordX, coordY)
         self.isFood = isFood
 
     def draw_point(self, canvas, coordX, coordY):

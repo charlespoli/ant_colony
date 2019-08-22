@@ -15,8 +15,8 @@ class Ant(object):
     def update_position(self):
         # Update ant's position and leave odour on previous
 
-        leave_odour()
-        ant_movement()
+        #self.leave_odour()
+        self.ant_movement()
 
 
 
@@ -46,11 +46,12 @@ class Ant(object):
 
 
     def leave_odour(self):
-
+        pass
 
 
 
     def draw_ant(self):
+        pass
 
 
 

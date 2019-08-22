@@ -6,17 +6,18 @@ class Grid(object):
 
     def __init__(self):
 
-        self.width = GRID_WIDTH
-        self.height = GRID_HEIGHT
+        self.grid = []
 
-        self.grid = [[ Case() for x in range(self.width)]for y in range(
-            self.height)]
+        for y in range(GRID_HEIGHT):
+            self.grid.append([])
+            for x in range(GRID_WIDTH):
+                self.grid[y].append(Case(x, y))
 
 
     def set_interaction_points(self):
 
-        home = InteractionPoint(False)
-        food = InteractionPoint(True)
+        home = InteractionPoint(0, 0, False)
+        food = InteractionPoint(GRID_HEIGHT - 1, GRID_WIDTH - 1, True)
 
         self.grid[0][0] = home
         self.grid[self.height - 1][self.width - 1] = food

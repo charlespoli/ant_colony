@@ -1,36 +1,26 @@
-from tkinter import * 
+from tkinter import *
 from grid import Grid
 from constant import *
+from drawing_manager import *
 
 fenetre = Tk()
 fenetre.geometry("1200x800")
-fenetre.resizable(0, 0)
+# fenetre.resizable(0, 0)
 
-width = CANVAS_WIDTH
-height = CANVAS_HEIGHT
-canvas = Canvas(fenetre, width=width, height=height, background='#D3D3D3')
+DM = Drawer(fenetre)
 
+test_grid = Grid()
 
-test = Grid()
+test_grid.set_interaction_points()
 
-test.set_interaction_points()
-test.
-test.print_grid()
+test_grid.print_grid()
 
-
-
-canvas.pack()
+DM.draw_grid(test_grid.grid)
 
 fenetre.mainloop()
 
-
-
-
-
-
-
 # while True:
 
-    # grid.update_odour()
-    # ant.update_position()
-    # grid.check_interaction_point()
+# grid.update_odour()
+# ant.update_position()
+# grid.check_interaction_point()
