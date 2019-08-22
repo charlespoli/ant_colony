@@ -25,10 +25,10 @@ class InteractionPoint(AbstractCase):
         super().__init__(coordX, coordY)
         self.isFood = isFood
 
-    def draw_point(self, canvas, coordX, coordY):
+    def draw_point(self, canvas):
 
-        x = coordX * CELL_SIZE
-        y = coordY * CELL_SIZE
+        x = self.coordX * CELL_SIZE
+        y = self.coordY * CELL_SIZE
         if self.isFood:
             color = COLOR_RED
 

@@ -4,7 +4,6 @@ from case import *
 class Grid(object):
 
     def __init__(self):
-
         self.grid = []
         for y in range(GRID_HEIGHT):
             self.grid.append([])
@@ -39,17 +38,7 @@ class Grid(object):
                     pass
 
                 elif isinstance(element, InteractionPoint):
-                    x = element.coordX * CELL_SIZE
-                    y = element.coordY * CELL_SIZE
-                    if element.isFood:
-                        color = COLOR_RED
-
-                    else:
-                        color = COLOR_BLUE
-
-                    canvas.create_rectangle(x, y, x + CELL_SIZE - 1,
-                                            y + CELL_SIZE - 1, fill=color)
-                    print(x, y)
+                    element.draw_point(canvas)
 
     def update_odour(self):
         # Odour decays
