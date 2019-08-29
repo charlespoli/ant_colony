@@ -3,13 +3,13 @@ from case import *
 
 class Grid(object):
 
-    def __init__(self):
+    def __init__(self, canvas):
 
         self.grid = []
         for y in range(GRID_HEIGHT):
             self.grid.append([])
             for x in range(GRID_WIDTH):
-                self.grid[y].append(Case(x, y))
+                self.grid[y].append(Case(x, y, canvas))
 
     def set_interaction_points(self):
         """Places the interaction points on the grid."""
@@ -45,8 +45,15 @@ class Grid(object):
         # Odour decays by 1 unit.
         for row in self.grid:
             for element in row:
-                if element.odour_home > 0:
-                    element.odour_home -= 1
-                elif element.odour_food > 0:
-                    element.odour_food -= 1
+                if isinstance(element, Case):
+                    if element.odour_home > 0:
+                        element.odour_home -= 0.5
+                    elif element.odour_food > 0:
+                        element.odour_food -= 0.5
+
+    def draw_odours(self, canvas):
+        for row in self.grid:
+            for element in row:
+                if isinstance(element, Case):
+                    element.draw_odour(canvas)
 
