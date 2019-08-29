@@ -4,6 +4,7 @@ from case import *
 class Grid(object):
 
     def __init__(self):
+
         self.grid = []
         for y in range(GRID_HEIGHT):
             self.grid.append([])
@@ -11,6 +12,7 @@ class Grid(object):
                 self.grid[y].append(Case(x, y))
 
     def set_interaction_points(self):
+        '''Places the interaction points on the grid.'''
         home = InteractionPoint(0, 0, False)
         food = InteractionPoint(GRID_WIDTH - 1, GRID_HEIGHT - 1, True)
 
@@ -18,6 +20,7 @@ class Grid(object):
         self.grid[GRID_HEIGHT - 1][GRID_WIDTH - 1] = food
 
     def print_grid(self):
+        '''Prints grid with cases and interaction points.'''
         for row in self.grid:
             buffer = ""
             for element in row:
@@ -32,18 +35,19 @@ class Grid(object):
             print(buffer)
 
     def draw_grid(self, canvas):
+        '''Draws the grid on the canvas.'''
         for row in self.grid:
             for element in row:
-                if isinstance(element, Case):
-                    pass
-
-                elif isinstance(element, InteractionPoint):
+                if isinstance(element, InteractionPoint):
                     element.draw_point(canvas)
 
     def update_odour(self):
-        # Odour decays
-        pass
+        # Odour decays by 1 unit.
+        for row in self.grid:
+            for element in row:
+                if element.odour_home > 0:
+                    element.odour_home -= 1
+                elif element.odour_food > 0:
+                    element.odour_food -= 1
 
-    def check_interaction_point(self):
-        pass
-        # Checks if ant reaches interaction_point
+

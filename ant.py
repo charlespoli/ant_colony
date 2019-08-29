@@ -2,6 +2,7 @@ from random import choice
 from grid import Grid
 from constant import *
 from tkinter import *
+from case import *
 
 
 class Ant(object):
@@ -16,35 +17,34 @@ class Ant(object):
         y = self.coordY * CELL_SIZE
         self.canvas = canvas
         self.rectangle = self.canvas.create_rectangle(x, y, x + CELL_SIZE - 1,
-                                         y + CELL_SIZE - 1, fill=COLOR_ANT)
+            y + CELL_SIZE - 1, fill=COLOR_ANT)
 
         self.isHungry = isHungry
 
+
         Ant.List.append(self)
-
-
-    def update_position(self):
-        # Update ant's position and leave odour on previous
-
-        #self.leave_odour()
-        self.ant_movement()
-
-
 
     def ant_movement(self):
 
         directions = []
 
         if self.coordX - 1 > 0:
-            directions.append('L')
+            directions.append('l')
         if self.coordY - 1 > 0:
-            directions.append('U')
+            directions.append('u')
         if self.coordX + 1 < GRID_WIDTH:
-            directions.append('R')
+            directions.append('r')
         if self.coordY + 1 < GRID_HEIGHT:
-            directions.append('D')
+            directions.append('d')
 
-        dir = choice(directions)
+
+
+
+
+
+
+
+
 
         if dir == 'R':
             self.canvas.move(self.rectangle, CELL_SIZE, 0)
@@ -59,14 +59,25 @@ class Ant(object):
             self.canvas.move(self.rectangle, 0, - CELL_SIZE)
             self.coordY -= 1
 
+    def leave_odour(self, grid):
+        '''Leave odour at the ant's current position.'''
+        current_case = grid.grid[self.coordX - 1][self.coordY - 1]
+        if self.isHungry:
+            current_case.odour_home += 5
+        else:
+            current_case.odour_food += 5
 
-    def leave_odour(self):
-        pass
+    def check_interaction_point(self, grid):
+        to_check = grid.grid[self.coordX][self.coordY]
+        if self.isHungry:
+            if isinstance(to_check, InteractionPoint) and to_check.isFood:
+                self.isHungry = False
+        else:
+            if isinstance(to_check, InteractionPoint) and not to_check.isFood:
+                self.isHungry = True
 
 
 
-    def draw_ant(self):
-        pass
 
 
 
