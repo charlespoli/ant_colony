@@ -16,20 +16,19 @@ canvas = Canvas(window, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, background='#D
 canvas.pack()
 
 for i in range(20):
-    Ant(randint(0, GRID_WIDTH - 1), randint(0, GRID_HEIGHT - 1), canvas,
-        test_grid)
+    Ant(randint(0, GRID_WIDTH - 1), randint(0, GRID_HEIGHT - 1),
+        test_grid, canvas)
 
 test_grid.draw_grid(canvas)
 
 for i in range(200):
     for ant in Ant.List:
-        ant.leave_odour(test_grid)
+        ant.leave_odour()
         ant.ant_movement()
-        ant.check_interaction_point()
         canvas.update()
     sleep(0.1)
 
-test_grid.update_odour()
+#test_grid.update_odour()
 
 window.mainloop()
 
