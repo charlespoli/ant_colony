@@ -5,6 +5,7 @@ from tkinter import *
 from case import *
 from random import choices
 
+
 class Ant(object):
 
     List = []
@@ -29,24 +30,32 @@ class Ant(object):
         directions = []
 
         if self.coordX - 1 > 0:
-            left_case = self.grid.grid[self.coordX - 1][self.coordY]
+            left_case = self.grid.grid[self.coordY][self.coordX - 1]
             if not isinstance(left_case, InteractionPoint):
                 directions.append('L')
+            else:
+                self.change_target(left_case)
 
         if self.coordY - 1 > 0:
-            up_case = self.grid.grid[self.coordX][self.coordY - 1]
+            up_case = self.grid.grid[self.coordY - 1][self.coordX]
             if not isinstance(up_case, InteractionPoint):
                 directions.append('U')
+            else:
+                self.change_target(up_case)
 
         if self.coordX + 1 < GRID_WIDTH:
-            right_case = self.grid.grid[self.coordX + 1][self.coordY]
+            right_case = self.grid.grid[self.coordY][self.coordX + 1]
             if not isinstance(right_case, InteractionPoint):
                 directions.append('R')
+            else:
+                self.change_target(right_case)
 
         if self.coordY + 1 < GRID_HEIGHT:
-            down_case = self.grid.grid[self.coordX][self.coordY + 1]
+            down_case = self.grid.grid[self.coordY + 1][self.coordX]
             if not isinstance(down_case, InteractionPoint):
                 directions.append('D')
+            else:
+                self.change_target(down_case)
 
         weight = [1/len(directions) for i in range(len(directions))]
         current_index = 0
@@ -81,36 +90,34 @@ class Ant(object):
         elif dir == 'U':
             self.canvas.move(self.rectangle, 0, - CELL_SIZE)
             self.coordY -= 1
-        elif dir == None:
+        elif dir is None:
             pass
 
-    def odour_movement(self, coeff, index, weight):
+    def adjust_weight(self, case, weight, current_index):
         # Adjust the weight values accordingly to odour coefficients.
-        # TODO update function with for loop.
-        new_value = weight[index] + (coeff * ODOUR_FACTOR * (len(weight) - 1))
-
-        new = [weight[x] - coeff * ODOUR_FACTOR for x in range(len(weight)) if
-               x != index]
-        new.insert(index, new_value)
-        return new
-
-    def check_interaction_point(self, case):
         if self.isHungry:
-            if isinstance(case, InteractionPoint) and case.isFood:
-                self.isHungry = False
-                return True
-            else:
-                return False
+            reading = case.odour_food
         else:
-            if isinstance(case, InteractionPoint) and not case.isFood:
-                self.isHungry = True
-                return True
-            else:
-                return False
+            reading = case.odour_home
+
+        if reading > 0:
+
+            for el in weight:
+                el -= reading * ODOUR_FACTOR
+            weight[current_index] += (reading * ODOUR_FACTOR * len(weight))
+            return weight
+
+    def change_target(self, point):
+        if self.isHungry and point.isFood:
+            self.isHungry = False
+        elif not self.isHungry and not point.isFood:
+            self.isHungry = True
+        else:
+            return
 
     def leave_odour(self):
         """Leave odour at the ant's current position."""
-        current_case = self.grid.grid[self.coordX - 1][self.coordY - 1]
+        current_case = self.grid.grid[self.coordY][self.coordX]
 
         if self.isHungry:
             current_case.odour_home += 5
@@ -121,16 +128,6 @@ class Ant(object):
             if current_case.odour_food > 50:
                 current_case.odour_food = 50
 
-    def adjust_weight(self, case, weight, current_index):
-        if self.isHungry:
-            reading = case.odour_food
-        else:
-            reading = case.odour_home
-
-        if reading > 0:
-            new_weight = self.odour_movement(reading, current_index,
-                            weight)
-            return new_weight
 
 
 

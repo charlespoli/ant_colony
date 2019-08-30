@@ -19,13 +19,15 @@ class Case(AbstractCase):
         x = coordX * CELL_SIZE
         y = coordY * CELL_SIZE
         self.rectangle = canvas.create_rectangle(x, y, x + CELL_SIZE
-            - 1, y + CELL_SIZE - 1, fill='#000000')
+                                                 - 1, y + CELL_SIZE - 1,
+                                                 fill='#000000')
 
 
     def draw_odour(self, canvas):
         odour = self.odour_food + self.odour_home
         color = odour_to_hex(odour)
         canvas.itemconfig(self.rectangle, fill=color)
+
 
 class InteractionPoint(AbstractCase):
 

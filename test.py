@@ -22,16 +22,17 @@ for i in range(1):
         test_grid, canvas)
 
 test_grid.draw_grid(canvas)
+test_grid.draw_grid(canvas)
 
 for i in range(2000):
-    test_grid.draw_odours(canvas)
-    test_grid.update_odour()
     for ant in Ant.List:
         ant.leave_odour()
         ant.ant_movement()
+    test_grid.draw_odours(canvas)
+    test_grid.update_odour()
     canvas.update()
     print('tick')
-    sleep(0.1)
+    sleep(1)
 
 window.mainloop()
 

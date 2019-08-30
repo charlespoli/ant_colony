@@ -41,6 +41,13 @@ class Grid(object):
                 if isinstance(element, InteractionPoint):
                     element.draw_point(canvas)
 
+    def draw_odours(self, canvas):
+        # Draw each odour left by each ant on a grey scale.
+        for row in self.grid:
+            for element in row:
+                if isinstance(element, Case):
+                    element.draw_odour(canvas)
+
     def update_odour(self):
         # Odour decays by 1 unit.
         for row in self.grid:
@@ -50,10 +57,4 @@ class Grid(object):
                         element.odour_home -= 0.5
                     elif element.odour_food > 0:
                         element.odour_food -= 0.5
-
-    def draw_odours(self, canvas):
-        for row in self.grid:
-            for element in row:
-                if isinstance(element, Case):
-                    element.draw_odour(canvas)
 

@@ -16,7 +16,6 @@ COLOR_RED = '#e30e0e'
 COLOR_ANT = '#f6ff3d'
 
 
-
 def odour_to_hex(odour):
     grey = int(odour * 2.55)
     return '#{:02x}{:02x}{:02x}'.format(grey, grey, grey)
